@@ -32,8 +32,22 @@ module MS_Game
 	if game == "1"
 		
 	# Any code added to command line game should be added below.
-	
+	Hello world (for git exercise)
 #	g.start
+
+
+#      g.displaymenu
+
+#      g.displayemptyframe
+
+#     g.displayplayerscores
+
+#     g.displaybegingame
+
+       g.defdisplaywinner
+
+#     
+
 
 	
 	# Any code added to output the activity messages to the command line window should be added above.
