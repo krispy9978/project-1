@@ -33,7 +33,25 @@ module MS_Game
 		
 	# Any code added to command line game should be added below.
 	
-#	g.start
+	g.start
+	playing = true
+	while playing do
+		g.displaymenu
+		input = @input.gets.chomp
+		option = input.to_i
+		case option
+			when 9 
+			g.finish
+			playing false
+		when 1
+		
+		when 2
+		
+		else
+			
+		end
+		
+	end
 
 
 #      g.displaymenu
@@ -44,7 +62,7 @@ module MS_Game
 
 #     g.displaybegingame
 
-       g.defdisplaywinner
+ #      g.defdisplaywinner
 
 #     
 
