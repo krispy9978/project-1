@@ -1,0 +1,29 @@
+[33mcommit 5d761fd08cd9c2aebb272cdc65fc604ae3958fbf[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Kristoffer Hansen <kris-h@live.co.uk>
+Date:   Thu Mar 14 16:41:12 2019 +0000
+
+    Add bazz
+
+[33mcommit 8938265bddba4d1cf3cba6c1fbb3a82e31ba09b1[m
+Author: Kristoffer Hansen <kris-h@live.co.uk>
+Date:   Thu Mar 14 16:39:28 2019 +0000
+
+    Add baz
+
+[33mcommit 524ab14b31d59bfcb9062965848bcce98472cda1[m
+Author: Kristoffer Hansen <kris-h@live.co.uk>
+Date:   Thu Mar 14 16:34:48 2019 +0000
+
+    Add foo to repository
+
+[33mcommit f4af2749e15a0e87a8718858477843f984f0e432[m
+Author: Kristoffer Hansen <kris-h@live.co.uk>
+Date:   Thu Mar 14 16:29:55 2019 +0000
+
+    Add content to wad_ms_run_01.rb
+
+[33mcommit 0f5d584e3a87e19040ea8f013311628f356e7d24[m
+Author: Kristoffer Hansen <kris-h@live.co.uk>
+Date:   Thu Mar 14 15:55:02 2019 +0000
+
+    Initialize repository
