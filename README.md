@@ -109,6 +109,3 @@ Push them back to your github repository.
 $ git push
 The pull request on github will be automatically closed.
 
-Next: Handling merge conflicts
-
- CC BY   Karl Broman
