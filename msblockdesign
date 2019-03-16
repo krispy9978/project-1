@@ -1,0 +1,40 @@
+<<<<<code blocks and algorithm:>>>>>
+
+Welcome message:
+
+   
+Creators: 
+
+
+Menu: 
+Start [from last state] / New / exit / [enter for pause]
+
+#######################################################
+GAME ENGINE:
+blocks and procs(?)
+#Inputs player coordinates
+[###define cutoff point for player turn###]
+check = if player coordinate returns 'mine' then +=1
+      = if player coordinate returns 'no mine' then nothing
+
+
+#######################################################
+ALGORITHM:
+
+within the new matrix with fixed hotspot positions representing mines player 1 selects a coordinate.
+if player coordinate= m then +1[if = nil then nothing]
+
+
+#########################################################
+
+Error message [for invalid input]+[hints]:
+
+
+Player win message + player lose: 
+
+
+Finish message:
+
+
+
+
