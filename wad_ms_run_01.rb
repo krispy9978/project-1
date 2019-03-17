@@ -44,8 +44,11 @@ module MS_Game
 			g.finish
 			playing false
 		when 1
+		     #call saved matrix from previous state and continue [Possible .txt. file]
+		     # displayplayerscore ffrom save file [or variable with score value]
 		
 		when 2
+		     #clear score and display begin game
 		
 		else
 			
@@ -53,18 +56,15 @@ module MS_Game
 		
 	end
 
+	def play
+		
+		end
 
-#      g.displaymenu
 
-#      g.displayemptyframe
 
-#     g.displayplayerscores
 
-#     g.displaybegingame
 
- #      g.defdisplaywinner
 
-#     
 
 
 	
