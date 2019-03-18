@@ -56,57 +56,7 @@ module MS_Game
 		
 	end
 
-	class PlaymsCom
-		attr_accssor :player1 :player2 #?????
-		attr_reader                     #????
-		attr_writer                      #????
-		
-		def initialize ()
-			@player1 = Player.new(name: "Player 1", token: "X")
-                        @player2 = Player.new(name: "Player 2", token: "O")
-                        @players = [player1, player2]
-                        @game    = Game.new(players)
-                        @printer = game.printer
-                        @board   = game.board
-		end
-		
-		def start_game
-			players_turn
-		end
-		
-		def players_turn
-		end
-		
-		
-		def countscore
-		end
-		
-		def ask_for_coord
-		end
-		
-		def check_inputted_coord
-		end
-		
-		def display_menu
-			if #new 
-				#clear score // generate hotspots
-			elsif #start 
-				#load matrix coord values
-				
-		        else #exit
-				#exit game
-				
-		end 
-		
-		
-		def newgame
-			#clear board
-			#display matrix 
-			#get player turn 
-			#check winner
-		end
-			
-	end
+	
 		
 		
 
