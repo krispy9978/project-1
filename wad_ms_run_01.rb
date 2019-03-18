@@ -52,6 +52,8 @@ module MS_Game
 			when 9 
 			g.finish
 			playing false
+			####################the following code is an example and wont work with minesweeper###########
+			#################### put in place for a guideline                                  ###########
 		when 1
 		        puts "beggining game"
 			while turn != 0 do
@@ -77,7 +79,7 @@ module MS_Game
 						else
 							puts "invalid input"
 						end
-					else
+					      else
 						turn = 1
 					end
 					
