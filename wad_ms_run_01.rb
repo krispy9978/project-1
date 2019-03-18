@@ -56,9 +56,54 @@ module MS_Game
 		
 	end
 
-	def play
+	class PlaymsCom
+		attr_accssor :player1 :player2 #?????
+		attr_reader                     #????
+		attr_writer                      #????
 		
+		def initialize ()
 		end
+		
+		def start_game
+			players_turn
+		end
+		
+		def players_turn
+		end
+		
+		
+		def countscore
+		end
+		
+		def ask_for_coord
+		end
+		
+		def check_inputted_coord
+		end
+		
+		def display_menu
+			if #new 
+				#clear score // generate hotspots
+			elsif #start 
+				#load matrix coord values
+				
+		        else #exit
+				#exit game
+				
+		end 
+		
+		
+		def newgame
+			#clear board
+			#display matrix 
+			#get player turn 
+			#check winner
+		end
+			
+	end
+		
+		
+
 
 
 
