@@ -57,6 +57,7 @@ module MS_Game
 	end
 
 	class PlaymsCom
+		#require 'Game'
 		attr_accssor :player1 :player2 #?????
 		attr_reader                     #????
 		attr_writer                      #????
