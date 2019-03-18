@@ -34,6 +34,14 @@ module MS_Game
 	# Any code added to command line game should be added below.
 	
 	g.start
+	g.setplayer1
+	g.setplayer2
+	g.clearmatrix
+	g.hotspots
+	g.generatemines
+	
+	puts "#{g.matrix}\n"
+	
 	playing = true
 	while playing do
 		g.displaymenu
@@ -44,17 +52,77 @@ module MS_Game
 			g.finish
 			playing false
 		when 1
-		     #call saved matrix from previous state and continue [Possible .txt. file]
-		     # displayplayerscore ffrom save file [or variable with score value]
+		        puts "beggining game"
+			while turn != 0 do
+				if turn == 1
+					puts"player 1 enter coordinate x and y to place token to uncover mine"
+					coord = @input.gets.chomp
+					#split into two i's?
+					#
+					if  coord.to_i.to_s == coord
+						place = coord.to_i
+						if place != 0 && place <= #42?
+							#place X value to column push
+							turn = 2
+							g.setmatixcolumnvalue(place-1, g.player1.to_s)
+							g.checkwinner
+							#g.resulta +=1
+							if g.winner ==1 then
+								puts "player 1 wins!"
+								turn = 0
+							end
+						elsif place == 0
+							turn = 0
+						else
+							puts "invalid input"
+						end
+					else
+						turn = 1
+					end
+					
+				elsif turn == 2
+					puts "Player 2 enter coordinate x and y to place token to uncover mine"
+					coord = @input.gets.chomp
+					if coord.to_i.to_s == coord
+						place = coord.to_i
+						if place != 0 && place <= #42?
+							turn = 1
+							g.setmatrixcolumnvalue(place-1, g.player2.to_s)
+							g.checkwinner
+							if g.winner == 2 then
+								puts "player 2 wins"
+								turn = 0
+							end
+						elsif place = 0
+							turn = 0
+						else
+							puts "invalid input"
+						end
+					else
+						place = 2
+					end
+				else
+					puts "whose turn is it?"
+				end
+				if turn != 0 then
+					g.displaykey(matrixkey)#ammend#########
+					g.displaymatrix###############
+				end
+			end
+			
 		
 		when 2
-		     #clear score and display begin game
+		    puts "begin new game"
+		    g.clearmatrix
+		    puts "matrix initialised#{g.matrix}\n"
 		
 		else
+			g.finish
 			
 		end
 		
 	end
+
 
 	
 		
