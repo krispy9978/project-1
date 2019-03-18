@@ -152,9 +152,9 @@ module MS_Game
             rowFempty = "1|_|_|_|_|_|_|_|"
             
            @output.puts "#{title}"
-           for @matrix[c][i] in 1..7
-               @output.puts "#{rowdivider}"
-           end            
+          # for @matrix[c][i] in 1..7
+              @output.puts "#{rowdivider}"
+           #end            
                              
            @output.puts "#{rowAempty}"
            @output.puts "#{rowBempty}"
@@ -197,8 +197,19 @@ module MS_Game
 					j = j - 1
 				end
             @hotspots = generatemine
-        end
-            
+    end
+    
+    #def playerturns
+	#	g.displayemptyframe
+	#	g.generatemines
+	#	while playing do
+	#		@output.puts "Enter x and y value"
+	#	g.getcolumnvalue(x, y)
+	#	input = @input.gets.chomp
+	]#	end
+	#end
+
+
         def checkwinner 
             if resulta >= 3 then
                 winner = 1
