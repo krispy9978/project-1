@@ -63,6 +63,12 @@ module MS_Game
 		attr_writer                      #????
 		
 		def initialize ()
+			@player1 = Player.new(name: "Player 1", token: "X")
+                        @player2 = Player.new(name: "Player 2", token: "O")
+                        @players = [player1, player2]
+                        @game    = Game.new(players)
+                        @printer = game.printer
+                        @board   = game.board
 		end
 		
 		def start_game
