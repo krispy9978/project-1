@@ -7,17 +7,29 @@ require 'sinatra'
 # See http://rspec.codeschool.com/levels/1 for help about RSpec
 require "#{File.dirname(__FILE__)}/wad_ms_gen_01"
 
+def switchPlayer(player)
+	if player == 1
+		return 2
+	elsif player == 2
+		return 1
+	end
+end
+
 # Main program
 module MS_Game
 	@input = STDIN
 	@output = STDOUT
 	g = Game.new(@input, @output)
+	$wg = MS_Game::Game.new(STDIN,STDOUT)
 	playing = true
 	input = ""
 	option = 0
-	turn = 0
+	$player = 1
 	placed = nil
-		
+
+
+
+
 	@output.puts 'Enter "1" runs game in command-line window or "2" runs it in web browser.'
 	game = g.getinput
 	if game == "1"
@@ -28,121 +40,99 @@ module MS_Game
 		@output.puts "Invalid input! No game selected."
 		exit
 	end
-		
+
+
+	game_pause = false
+	$game_playing = true
+
+
 	if game == "1"
-		
+
 	# Any code added to command line game should be added below.
-	
-	
-	g.start
-	g.setplayer1
-	g.setplayer2
-	g.clearmatrix
-	g.hotspots
-	g.generatemines
-	
-	puts "#{g.matrix}\n"
-	
-	playing = true
-	while playing do
+		g.start
+		while(1)
 		g.displaymenu
-		input = @input.gets.chomp
-		option = input.to_i
+		option = g.getinput.chomp
 		case option
-			when 9 
-			g.finish
-			playing false
-			####################the following code is an example and wont work with minesweeper###########
-			#################### put in place for a guideline                                  ###########
-		when 1
-		        puts "beggining game"
-			while turn != 0 do
-				if turn == 1
-					puts"player 1 enter coordinate x and y to place token to uncover mine"
-					coord = @input.gets.chomp
-					#split into two i's?
-					#
-					if  coord.to_i.to_s == coord
-						place = coord.to_i
-						if place != 0 && place <= #42?
-							#place X value to column push
-							turn = 2
-							g.setmatixcolumnvalue(place-1, g.player1.to_s)
-							g.checkwinner
-							#g.resulta +=1
-							if g.winner ==1 then
-								puts "player 1 wins!"
-								turn = 0
-							end
-						elsif place == 0
-							turn = 0
-						else
-							puts "invalid input"
-						end
-					      else
-						turn = 1
-					end
-					
-				elsif turn == 2
-					puts "Player 2 enter coordinate x and y to place token to uncover mine"
-					coord = @input.gets.chomp
-					if coord.to_i.to_s == coord
-						place = coord.to_i
-						if place != 0 && place <= #42?
-							turn = 1
-							g.setmatrixcolumnvalue(place-1, g.player2.to_s)
-							g.checkwinner
-							if g.winner == 2 then
-								puts "player 2 wins"
-								turn = 0
-							end
-						elsif place = 0
-							turn = 0
-						else
-							puts "invalid input"
-						end
-					else
-						place = 2
-					end
-				else
-					puts "whose turn is it?"
-				end
-				if turn != 0 then
-					g.displaykey(matrixkey)#ammend#########
-					g.displaymatrix###############
-				end
+		when "1"
+			if game_pause == false
+				@output.puts "No stored game, create a new game!"
+				g.clearcolumns
+				g.clearscores
+				g.displayemptyframe
+				g.generatemines
+				g.setupgamematrix
+				g.burrymine
+
+				$player=1
 			end
-			
-		
-		when 2
-		    puts "begin new game"
-		    g.clearmatrix
-		    puts "matrix initialised#{g.matrix}\n"
-		
-		else
-			g.finish
-			
-		end
-		
-	end
 
-<<<<<<< HEAD
-=======
+				$game_playing = true
+         g.setplayer1
+         g.setplayer2
 
-	
-		
-		
-
->>>>>>> 1cf513f2b473f2c8cfca6c1e6756870f061375e0
+         g.displaybegingame
 
 
 
+         while $game_playing == true
+             if $player == 1
+                 g.displayplayer1prompt
+             elsif $player == 2
+                 g.displayplayer2prompt
+             end
+             @output.puts "Please enter the row value (Enter 0 to go back to menu)"
+             a = gets.chomp.to_i
+			case a
+
+				when (a < 1 || a > 6)
+					g.displayinvalidinputerror
+
+				 when 0
+					 game_pause=true
+					 @output.puts "The game is paused, enter 1 to continue."
+					 break
+
+
+				 else
+					 @output.puts "Please enter the column value"
+					 b=gets.chomp.to_i
+					 if (b < 1 || b > 7)
+							 g.displayinvalidinputerror
+						 else
+						 a=a-1
+						 b=b-1
+						 g.getcolumnvalue(a,b)
+						 g.setmatrixcolumnvalue(a,b)
+						 # no room
+
+
+						 g.updatematrix
+						 g.display_gamematrix
+						 g.checkwinner
+
+					 $player=switchPlayer($player)
+						 end
+					 end
+			 end
 
 
 
 
+                   when "2"
+			 @output.puts "New game created"
+			 game_pause = false
+			 g.clearcolumns
 
-	
+
+            when "9"
+               @output.puts "Exit"
+		break
+
+     else g.displayinvalidinputerror
+     end
+	 end
+
 	# Any code added to output the activity messages to the command line window should be added above.
 
 		exit	# Does not allow command-line game to run code below relating to web-based version
@@ -155,7 +145,9 @@ end
 
 	# Any code added to output the activity messages to a browser should be added below.
 
-
+	get "/" do
+		$wg.start
+	end
 
 	# Any code added to output the activity messages to a browser should be added above.
 
