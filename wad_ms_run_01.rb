@@ -144,9 +144,10 @@ end
 # Sinatra routes
 
 	# Any code added to output the activity messages to a browser should be added below.
-
+ ####call to .erb within view >>>
 	get "/" do
 		$wg.start
+		
 	end
 
 	# Any code added to output the activity messages to a browser should be added above.
