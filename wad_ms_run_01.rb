@@ -8,10 +8,11 @@ require 'sinatra'
 require "#{File.dirname(__FILE__)}/wad_ms_gen_01"
 
 def switchPlayer(player)
-	if player == 1
-		return 2
-	elsif player == 2
-		return 1
+
+	if $player == 1
+		$player= 2
+	elsif $player == 2
+		$player=1
 	end
 end
 
@@ -25,6 +26,9 @@ module MS_Game
 	input = ""
 	option = 0
 	$player = 1
+	$score1=0
+	$score2=0
+	$matrix_space = true
 	placed = nil
 
 
@@ -81,53 +85,61 @@ module MS_Game
              elsif $player == 2
                  g.displayplayer2prompt
              end
+
              @output.puts "Please enter the row value (Enter 0 to go back to menu)"
              a = gets.chomp.to_i
-			case a
-
-				when (a < 1 || a > 6)
-					g.displayinvalidinputerror
-
-				 when 0
-					 game_pause=true
-					 @output.puts "The game is paused, enter 1 to continue."
-					 break
 
 
-				 else
-					 @output.puts "Please enter the column value"
-					 b=gets.chomp.to_i
-					 if (b < 1 || b > 7)
+						 while a <1 || a>6
 							 g.displayinvalidinputerror
-						 else
-						 a=a-1
-						 b=b-1
-						 g.getcolumnvalue(a,b)
-						 g.setmatrixcolumnvalue(a,b)
-						 # no room
-
-
-						 g.updatematrix
-						 g.display_gamematrix
-						 g.checkwinner
-
-					 $player=switchPlayer($player)
+							 @output.puts "Please enter the row value"
+							 a = gets.chomp.to_i
 						 end
-					 end
-			 end
+
+						 case a
+
+						 when 0
+							 game_pause=true
+							 @output.puts "The game is paused, enter 1 to continue."
+							 break
+
+
+						 else
+							 @output.puts "Please enter the column value"
+							 b=gets.chomp.to_i
+							 if (b < 1 || b > 7)
+								 g.displayinvalidinputerror
+							 else
+								 a-=1
+								 b-=1
+								 g.getcolumnvalue(a,b)
+								 g.setmatrixcolumnvalue(a,b)
+								 #no space
+								 g.updatematrix
+								 g.display_gamematrix
+								 g.checkwinner
+
+								 if $matrix_space == true
+									 $player=switchPlayer($player)
+								 else
+								 end
+
+							 end
+						 end
+				 end
 
 
 
 
-                   when "2"
+     when "2"
 			 @output.puts "New game created"
 			 game_pause = false
 			 g.clearcolumns
 
 
-            when "9"
-               @output.puts "Exit"
-		break
+     when "9"
+         @output.puts "Exit"
+				 break
 
      else g.displayinvalidinputerror
      end
@@ -144,10 +156,9 @@ end
 # Sinatra routes
 
 	# Any code added to output the activity messages to a browser should be added below.
- ####call to .erb within view >>>
+
 	get "/" do
 		$wg.start
-		
 	end
 
 	# Any code added to output the activity messages to a browser should be added above.
