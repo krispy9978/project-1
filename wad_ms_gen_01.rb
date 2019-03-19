@@ -66,7 +66,7 @@ module MS_Game
         end
 
         def displayplayerscores
-            @output.puts ("Player 1: 0 and Player 2: 0")
+            @output.puts ("Player 1: #{$score1} and Player 2: #{$score2}")
         end
 
         def displayplayer1prompt
@@ -91,6 +91,7 @@ module MS_Game
             elsif p == 2
                     @output.puts ("Player #{p} wins.")
             end
+						displayplayerscores
 						$game_playing = false
             displaymenu
         end
@@ -134,7 +135,9 @@ module MS_Game
                 $matrix[c][i] = "O"
                 $gamematrix[c][i]= "O"
 						elsif $matrix[c][i] == "X" || $matrix[c][i] == "O"
+							$matrix_space = false
 							@output.puts "no more room"
+
             else
                 $matrix[c][i] = "X"
                 $gamematrix[c][i]= "X"
@@ -152,25 +155,26 @@ module MS_Game
             @rowFempty = "6|_|_|_|_|_|_|_|"
             @output.puts ("#{@title}")
             @output.puts ("#{@rowAempty}")
-			@output.puts ("#{@rowBempty}")
-			@output.puts ("#{@rowCempty}")
-			@output.puts ("#{@rowDempty}")
-			@output.puts ("#{@rowEempty}")
-			@output.puts ("#{@rowFempty}")
+						@output.puts ("#{@rowBempty}")
+						@output.puts ("#{@rowCempty}")
+						@output.puts ("#{@rowDempty}")
+						@output.puts ("#{@rowEempty}")
+						@output.puts ("#{@rowFempty}")
         end
 
-        # assigns mines to random cells on the board
+
+
         def generatemines
-			pos = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42]
-			hotspots = []
-				for i in 0..41 do
-			   	j = pos.size-1
-				r = rand(0..j)
-				hotspots.push(pos[r])
-				pos.delete_at(r)
-				j = j - 1
+					pos = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42]
+					hotspots = []
+					for i in 0..41 do
+						j = pos.size-1
+						r = rand(0..j)
+						hotspots.push(pos[r])
+						pos.delete_at(r)
+						j = j - 1
 					end
-				$hotspots = hotspots
+						$hotspots = hotspots
             for i in 0..25 do
             $hotspots[i] = "!"
             end
@@ -178,31 +182,31 @@ module MS_Game
         end
 
 
-	 def setupgamematrix
-		 $gamematrix=[]
-		      for i in 0..5 do
-				 $gamematrix[i] = ["_","_","_","_","_","_","_"]
-		       end
-	end
+				        def setupgamematrix
+				          $gamematrix=[]
+				            for i in 0..5 do
+				               $gamematrix[i] = ["_","_","_","_","_","_","_"]
+				            end
+				        end
 
-	def display_gamematrix
-		$gamematrix_title1 = "          Game Matrix"
-		$gamematrix_title2 = "  1    2    3    4    5    6    7"
-                $rowAg = $gamematrix[0]
-                $rowBg = $gamematrix[1]
-                $rowCg = $gamematrix[2]
-                $rowDg = $gamematrix[3]
-                $rowEg = $gamematrix[4]
-	           $rowFg = $gamematrix[5]
-	            @output.puts ("#{$gamematrix_title1}")
-		@output.puts ("#{$gamematrix_title2}")
-		@output.puts ("#{$rowAg}")
-		@output.puts ("#{$rowBg}")
-		@output.puts ("#{$rowCg}")
-		@output.puts ("#{$rowDg}")
-		@output.puts ("#{$rowEg}")
-		@output.puts ("#{$rowFg}")
-	end
+				        def display_gamematrix
+				            $gamematrix_title1 = "          Game Matrix"
+										$gamematrix_title2 = "  1    2    3    4    5    6    7"
+				            $rowAg = $gamematrix[0]
+				            $rowBg = $gamematrix[1]
+				            $rowCg = $gamematrix[2]
+				            $rowDg = $gamematrix[3]
+				            $rowEg = $gamematrix[4]
+				            $rowFg = $gamematrix[5]
+				            @output.puts ("#{$gamematrix_title1}")
+										@output.puts ("#{$gamematrix_title2}")
+				            @output.puts ("#{$rowAg}")
+										@output.puts ("#{$rowBg}")
+										@output.puts ("#{$rowCg}")
+										@output.puts ("#{$rowDg}")
+										@output.puts ("#{$rowEg}")
+										@output.puts ("#{$rowFg}")
+				        end
 
         def burrymine
             $matrix[0]=$hotspots[0..6]
@@ -224,10 +228,12 @@ module MS_Game
         end
 
         def checkwinner
-            if $resulta == 1
+            if $resulta == 2
                 $winner=1
-            elsif $resultb == 1
+								$score1+=1
+            elsif $resultb == 2
                 $winner=2
+								$score2+=1
             else
                 $winner= nil
             end
