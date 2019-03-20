@@ -134,7 +134,7 @@ module MS_Game
                 end
                 $matrix[c][i] = "O"
                 $gamematrix[c][i]= "O"
-						elsif $matrix[c][i] == "X" || $matrix[c][i] == "O"
+						elsif $matrix[c][i] == "X" || $matrix[c][i] == "O" #check whether the room is occupied
 							$matrix_space = false
 							@output.puts "no more room"
 
@@ -175,40 +175,47 @@ module MS_Game
 						j = j - 1
 					end
 						$hotspots = hotspots
-            for i in 0..25 do
+            for i in 0..25 do #25 mines in the matrix
             $hotspots[i] = "!"
             end
             $hotspots = $hotspots.shuffle
         end
 
+				def showcurrentresult
+					@output.puts ("Mine found")
+					@output.puts ("Player 1: #{$resulta}")
+					@output.puts ("Player 2: #{$resultb}")
+				end
 
-				        def setupgamematrix
-				          $gamematrix=[]
-				            for i in 0..5 do
-				               $gamematrix[i] = ["_","_","_","_","_","_","_"]
-				            end
-				        end
 
-				        def display_gamematrix
-				            $gamematrix_title1 = "          Game Matrix"
-										$gamematrix_title2 = "  1    2    3    4    5    6    7"
-				            $rowAg = $gamematrix[0]
-				            $rowBg = $gamematrix[1]
-				            $rowCg = $gamematrix[2]
-				            $rowDg = $gamematrix[3]
-				            $rowEg = $gamematrix[4]
-				            $rowFg = $gamematrix[5]
-				            @output.puts ("#{$gamematrix_title1}")
-										@output.puts ("#{$gamematrix_title2}")
-				            @output.puts ("#{$rowAg}")
-										@output.puts ("#{$rowBg}")
-										@output.puts ("#{$rowCg}")
-										@output.puts ("#{$rowDg}")
-										@output.puts ("#{$rowEg}")
-										@output.puts ("#{$rowFg}")
-				        end
 
-        def burrymine
+				def setupgamematrix
+					$gamematrix=[]
+				  for i in 0..5 do
+						$gamematrix[i] = ["_","_","_","_","_","_","_"]
+					end
+				end
+
+				def display_gamematrix
+					$gamematrix_title1 = "          Game Matrix"
+					$gamematrix_title2 = "  1    2    3    4    5    6    7"
+					$rowAg = $gamematrix[0]
+					$rowBg = $gamematrix[1]
+					$rowCg = $gamematrix[2]
+					$rowDg = $gamematrix[3]
+					$rowEg = $gamematrix[4]
+					$rowFg = $gamematrix[5]
+					@output.puts ("#{$gamematrix_title1}")
+					@output.puts ("#{$gamematrix_title2}")
+					@output.puts ("#{$rowAg}")
+					@output.puts ("#{$rowBg}")
+					@output.puts ("#{$rowCg}")
+					@output.puts ("#{$rowDg}")
+					@output.puts ("#{$rowEg}")
+					@output.puts ("#{$rowFg}")
+				end
+
+        def burrymine #assign mine to matrix
             $matrix[0]=$hotspots[0..6]
             $matrix[1]=$hotspots[7..13]
             $matrix[2]=$hotspots[14..20]
@@ -228,10 +235,10 @@ module MS_Game
         end
 
         def checkwinner
-            if $resulta == 2
+            if $resulta == 3
                 $winner=1
 								$score1+=1
-            elsif $resultb == 2
+            elsif $resultb == 3
                 $winner=2
 								$score2+=1
             else
