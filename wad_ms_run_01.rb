@@ -21,7 +21,8 @@ module MS_Game
 	@input = STDIN
 	@output = STDOUT
 	g = Game.new(@input, @output)
-	$wg = MS_Game::Game.new(STDIN,STDOUT)
+	$wg = Game.new(@input, @output)
+	#$wg = MS_Game::Game.new(STDIN,STDOUT)
 	playing = true
 	input = ""
 	option = 0
@@ -114,14 +115,15 @@ module MS_Game
 								 b-=1
 								 g.getcolumnvalue(a,b)
 								 g.setmatrixcolumnvalue(a,b)
-								 #no space
+								 g.showcurrentresult
 								 g.updatematrix
 								 g.display_gamematrix
 								 g.checkwinner
 
 								 if $matrix_space == true
 									 $player=switchPlayer($player)
-								 else
+								 elsif $matrix_space == false
+									 $matrix_space = true
 								 end
 
 							 end
@@ -135,6 +137,8 @@ module MS_Game
 			 @output.puts "New game created"
 			 game_pause = false
 			 g.clearcolumns
+			 $score1=0
+			 $score2=0
 
 
      when "9"
@@ -158,8 +162,24 @@ end
 	# Any code added to output the activity messages to a browser should be added below.
 
 	get "/" do
-		$wg.start
+		if $wgame_playing = false
+			erb :home
+		elsif $wgame_playing == true
+			if $wnew_game == false
+			end
+			
+
 	end
+
+
+	post '/new' do
+		$wgame_playing == true
+		$wnew_game == true
+		redirect '/'
+	end
+
+end
+
 
 	# Any code added to output the activity messages to a browser should be added above.
 
